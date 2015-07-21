@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0; }
+div{ width:6px; height:6px; border-radius:50%; position:absolute; transition:1s; }
+</style>
+<script>
+window.onload=function(){
+	var r=0;
+	var deg=0;
+	var disx=600;
+	var disy=300;
+	
+	var timer=null
+	var timer2=null
+	
+	
+	
+	timer=setInterval(function(){
+		deg+=5;
+		r+=0.2;
+		//Math.sin(deg*Math.PI/180)=a/r;
+		//Math.cos(deg*Math.PI/180)=b/r;	
+		
+		var a=Math.sin(deg*Math.PI/180) * r;
+		var b=Math.cos(deg*Math.PI/180) * r;
+		var oDiv=document.createElement('div');
+		oDiv.style.background='#'+getColor();
+		oDiv.style.left=disx+b+'px';
+		oDiv.style.top=disy+a+'px';
+		oDiv.id='l'+deg;
+		document.body.appendChild(oDiv);
+		hide();
+		if(r>=200){
+			r=200; 
+			//var aDiv=document.getElementsByTagName('div');
+			//alert(aDiv.length)
+			clearInterval(timer);
+			clearInterval(timer2);
+		};
+	},20);
+	
+	function hide(){
+		var aDiv=document.getElementsByTagName('div');
+		var i=0;
+		if(aDiv.length>=60){
+			timer2=setInterval(function(){
+				i++;
+				aDiv[i].style.opacity=0;
+				//console.log(aDiv.length)
+			},30);	
+		}
+	}
+	
+	
+	function getColor(){
+		var str=Math.ceil(Math.random()*16777215).toString(16);
+		if(str.length<6){
+			str+='0';	
+		}
+		return str;
+	}
+};
+</script>
+</head>
+
+<body>
+<div></div>
+</body>
+</html>
